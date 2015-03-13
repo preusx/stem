@@ -1,0 +1,9 @@
+{
+    "name": "Markup-Library",
+    "devDependencies": {
+        "html5shiv": "latest",
+        "es5-shim": "latest",
+        "jquery": "1.*",
+        "angular": "1.*"
+    }
+}

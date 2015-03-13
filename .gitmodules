@@ -1,0 +1,3 @@
+[submodule "dev/jade/bemto"]
+	path = dev/jade/bemto
+	url = git@github.com:kizu/bemto.git

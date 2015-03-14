@@ -1,3 +1,6 @@
 [submodule "dev/jade/bemto"]
 	path = dev/jade/bemto
 	url = git@github.com:kizu/bemto.git
+[submodule "dev/styl/modules/stem-stylus-utils"]
+	path = dev/styl/modules/stem-stylus-utils
+	url = git@github.com:preusx/stem-stylus-utils.git

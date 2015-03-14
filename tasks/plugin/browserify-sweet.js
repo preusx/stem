@@ -9,7 +9,7 @@ module.exports = function (optionsUser) {
   var through = require('through');
   var sourceMap = require('convert-source-map');
 
-  var pt = path.normalize(__dirname + '../../');
+  var pt = path.normalize(__dirname + '../../../');
   optionsUser = optionsUser || {};
 
   // Receiving list of macro modules.
@@ -30,7 +30,7 @@ module.exports = function (optionsUser) {
   // Loading macros.
   for (var i = 0, l = modulesNamesList.length; i < l; i++) {
     modulesList = modulesList.concat(sweet.loadModule(fs.readFileSync(
-      path.normalize(pt + './' + modulesNamesList[i] +  '.sjs'), 'utf8'
+      path.normalize(pt + './' + modulesNamesList[i]), 'utf8'
     )));
   }
 
@@ -51,15 +51,20 @@ module.exports = function (optionsUser) {
       extend(options.modules, modulesList);
 
       try {
-        r = sweet.expand(data, options);
+        r = sweet.compile(data, options);
       } catch(e) {
         return this.emit('error', e);
       }
 
-      var map = sourceMap.fromJSON(r.sourceMap);
-      map.sourcemap.sourcesContent = [data];
+      if(options.sourceMap) {
+        var map = sourceMap.fromJSON(r.sourceMap);
+        map.sourcemap.sourcesContent = [data];
 
-      this.queue(r.code + '\n' + map.toComment());
+        this.queue(r.code + '\n' + map.toComment());
+      } else {
+        this.queue(r.code);
+      }
+
       this.queue(null);
     }
   };

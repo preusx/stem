@@ -36,7 +36,22 @@ var dev    = function () {
     debug  : config.DEBUG
   })
   .transform({extensions: ['.coffee']}, coffeeify)
-  .transform({extensions: ['.js']}, sweetiefy())
+  .transform({extensions: ['.js']}, sweetiefy({
+    sourceMap: false,
+    modulesList: [
+      './dev/js/macro/stem-js-macro/index.sjs',
+      // Same as previous. Just for showing the possibilities.
+      // [
+      //   './dev/js/macro/stem-js-macro/macros/utility.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/operators.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/catch.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/arrow-function.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/decorator.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/for.sjs',
+      //   './dev/js/macro/stem-js-macro/macros/enum.sjs',
+      // ],
+    ],
+  }))
   .transform(babelify.configure({
     loose: 'all',
   }))

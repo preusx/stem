@@ -29,9 +29,21 @@ module.exports = function (optionsUser) {
 
   // Loading macros.
   for (var i = 0, l = modulesNamesList.length; i < l; i++) {
-    modulesList = modulesList.concat(sweet.loadModule(fs.readFileSync(
-      path.normalize(pt + './' + modulesNamesList[i]), 'utf8'
-    )));
+    var content = '';
+
+    if(Array.isArray(modulesNamesList[i])) {
+      for (var j = 0, ll = modulesNamesList[i].length; j < ll; j++) {
+        content += '\n' + fs.readFileSync(
+          path.normalize(pt + './' + modulesNamesList[i][j]), 'utf8'
+        );
+      }
+    } else {
+      content = fs.readFileSync(
+        path.normalize(pt + './' + modulesNamesList[i]), 'utf8'
+      );
+    }
+
+    modulesList = modulesList.concat(sweet.loadModule(content));
   }
 
   return function (file) {

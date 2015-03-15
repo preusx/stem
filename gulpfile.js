@@ -51,6 +51,12 @@ gulp.task('watch', function(){
   }
 });
 
+gulp.task('copy', [
+    'copy-vendor_scripts:dev',
+    'copy-images:dev',
+    'copy-fonts:dev',
+  ]);
+
 gulp.task('dist', [
     'scripts:build',
     'styles:build',

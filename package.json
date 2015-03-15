@@ -6,7 +6,7 @@
   "description": "Project stem",
   "repository": {
     "type": "git",
-    "url": "https://github.com/preusx/"
+    "url": "git://github.com/preusx/stem.git"
   },
   "devDependencies": {
     "babelify": "^5.0.4",

@@ -61,9 +61,7 @@ gulp.task('dist', [
     'scripts:build',
     'styles:build',
     'templates:build',
-    'copy-vendor_scripts:build',
-    'copy-images:build',
-    'copy-fonts:build',
+    'copy',
   ]);
 
 gulp.task('build', ['dist']);

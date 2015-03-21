@@ -4,3 +4,6 @@
 [submodule "dev/js/macro/stem-js-macro"]
 	path = dev/js/macro/stem-js-macro
 	url = git@github.com:preusx/stem-js-macro.git
+[submodule "dev/styl"]
+    path = dev/styl
+    url = git@github.com:preusx/stem-css.git

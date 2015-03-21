@@ -6,7 +6,7 @@ var DEBUG    = true,
     WATCHING = false;
 
 var folder = {
-  styl  : 'styl/',
+  styl  : 'stylus/',
   css   : 'css/',
   jade  : 'jade/',
   html  : 'html/',

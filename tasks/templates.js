@@ -1,54 +1,42 @@
-var config = require('./config.js');
 var gulp   = require('gulp');
 
-var paths = {
-  base: config.folder.dev + config.folder.jade,
-  source: [
-    config.folder.dev + config.folder.jade + 'template/**/*.jade',
-    '!' + config.folder.dev + config.folder.jade + 'template/**/_*.jade'
-  ],
-  destination: config.folder.dist + config.folder.html,
-};
+var config = require('./config');
+var Task = require('./plugin/task');
 
+module.exports = Task.extend({
+  paths: {
+    base: config.folder.dev + config.folder.jade,
+    source: [
+      config.folder.dev + config.folder.jade + 'template/**/*.jade',
+      '!' + config.folder.dev + config.folder.jade + 'template/**/_*.jade'
+    ],
+    dest: config.folder.dist + config.folder.html,
+  },
 
-var watch  = config.folder.dev + config.folder.jade + '**/*.jade';
+  watch: config.folder.dev + config.folder.jade + '**/*.jade',
 
+  pipes: {
+    dev: function(pipe) {
+      var jade             = require('gulp-jade');
+      var jadeAffected     = require('gulp-jade-find-affected');
+      var jadeInheritance  = require('gulp-jade-inheritance');
+      var jadeCompiler     = require('jade');
+      var changed          = require('gulp-changed');
 
-var dev    = function () {
-  var jade             = require('gulp-jade');
-  var jadeAffected     = require('gulp-jade-find-affected');
-  var jadeInheritance  = require('gulp-jade-inheritance');
-  var jadeCompiler     = require('jade');
-  var changed          = require('gulp-changed');
-
-  return gulp.src(paths.source)
-    .pipe(config.WATCHING ? plumber({
-      errorHandler: config.errorHandler,
-    }) : config.noop())
-    .pipe(config.WATCHING ? changed(paths.destination, {
-      extension: '.html'
-    }) : config.noop())
-    .pipe(jadeInheritance({
-      basedir: paths.base,
-    }))
-    .pipe(jade({
-      pretty: config.DEBUG,
-      jade: jadeCompiler,
-    }))
-    .pipe(gulp.dest(paths.destination));
-};
-
-
-var build  = dev; // function() {};
-
-
-
-/**
- * Export
- * ======================================================================== */
-
-module.exports = {
-  watch: watch,
-  dev:   dev,
-  build: build,
-};
+      return pipe
+        .pipe(config.WATCHING ? plumber({
+          errorHandler: config.errorHandler,
+        }) : config.noop())
+        .pipe(config.WATCHING ? changed(this.paths.dest, {
+          extension: '.html'
+        }) : config.noop())
+        .pipe(jadeInheritance({
+          basedir: this.paths.base,
+        }))
+        .pipe(jade({
+          pretty: config.DEBUG,
+          jade: jadeCompiler,
+        }));
+    }
+  }
+});

@@ -1,29 +1,20 @@
-var config = require('./config.js');
 var gulp   = require('gulp');
 
-var paths = {
-  base        : [config.folder.dev + config.folder.],
-  source      : config.folder.dev + config.folder. + ,
-  destination : config.folder.dist + config.folder.,
-};
+var config = require('./config');
+var Task = require('./plugin/task');
 
+module.exports = Task.extend({
+  paths: {
+    base        : [config.folder.dev + config.folder.],
+    source      : config.folder.dev + config.folder. + ,
+    dest        : config.folder.dist + config.folder.,
+  },
 
-var watch  = '';
+  watch: config.folder.dev + config.folder.styl + '**/*.styl',
 
-
-var dev    = function() {};
-
-
-var build  = dev; // function() {};
-
-
-
-/**
- * Export
- * ======================================================================== */
-
-module.exports = {
-  watch: watch,
-  dev:   dev,
-  build: build,
-};
+  pipes: {
+    dev: function(pipe) {
+      return pipe;
+    }
+  }
+});

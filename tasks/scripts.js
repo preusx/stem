@@ -36,7 +36,6 @@ module.exports = Task.extend({
       var bundler = browserify({
           insertGlobals : false,
           paths: this.paths.base,
-          // extensions: ['.coffee', '.js'],
           debug  : config.DEBUG
         })
         .transform({extensions: ['.coffee']}, coffeeify)
@@ -44,16 +43,6 @@ module.exports = Task.extend({
           sourceMap: false,
           modulesList: [
             './dev/js/macro/stem-js-macro/index.sjs',
-            // Same as previous. Just for showing the possibilities.
-            // [
-            //   './dev/js/macro/stem-js-macro/macros/utility.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/operators.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/catch.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/arrow-function.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/decorator.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/for.sjs',
-            //   './dev/js/macro/stem-js-macro/macros/enum.sjs',
-            // ],
           ],
         }))
         .transform(babelify.configure({
@@ -80,19 +69,7 @@ module.exports = Task.extend({
             .pipe(size());
         };
 
-      return bundle().on('end', function() {
-          // Adding my sweetjs runtime.
-          var pt = path.normalize(__dirname + '../../' + config.folder.dev + '/macro');
-
-          return pipe
-            .pipe(sourcemaps.init({
-                  loadMaps: true
-                }))
-            .pipe(concat(self.paths.filename))
-            .pipe(sourcemaps.write())
-            .pipe(size());
-        });
-      // console.dir(bundle());
+      return bundle();
     }
   }
 });

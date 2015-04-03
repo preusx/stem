@@ -22,6 +22,7 @@ module.exports = Task.extend({
       var jadeInheritance  = require('gulp-jade-inheritance');
       var jadeCompiler     = require('jade');
       var changed          = require('gulp-changed');
+      var plumber          = require('gulp-plumber');
 
       return pipe
         .pipe(config.WATCHING ? plumber({

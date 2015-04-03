@@ -21,9 +21,16 @@ var Task = module.exports = {
 
         // Is function. Underscore code.
         if(!!(thus && thus.constructor && thus.call && thus.apply)) {
-          object[i] = thus.bind(that);
-        } else if(thus === Object(thus) &&
+          if(typeof thus.$m === 'undefined') {
+            object[i] = thus.bind(that);
+          } else {
+            object[i] = thus.$m.bind(that);
+          }
+
+          object[i].$m = thus;
+        } else if(thus === Object(thus) && (typeof thus.$m === 'undefined') &&
             Object.prototype.toString.call(thus) !== '[object Array]') {
+
           binder(thus);
         }
       }

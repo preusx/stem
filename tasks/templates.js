@@ -7,8 +7,8 @@ module.exports = Task.extend({
   paths: {
     base: config.folder.dev + config.folder.jade,
     source: [
-      config.folder.dev + config.folder.jade + 'template/**/*.jade',
-      '!' + config.folder.dev + config.folder.jade + 'template/**/_*.jade'
+      config.folder.dev + config.folder.jade + 'templates/**/*.jade',
+      '!' + config.folder.dev + config.folder.jade + 'templates/**/_*.jade'
     ],
     dest: config.folder.dist + config.folder.html,
   },

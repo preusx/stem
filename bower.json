@@ -4,6 +4,10 @@
         "html5shiv": "latest",
         "es5-shim": "latest",
         "jquery": "1.*",
-        "angular": "1.*"
+        "angular": "1.*",
+        "angular-cookies": "latest",
+        "angular-route": "latest",
+        "angular-resource": "latest",
+        "angular-ui-router": "latest"
     }
 }

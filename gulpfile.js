@@ -12,7 +12,7 @@ var taskNames = [
   'scripts',
   'styles',
   'templates',
-  'copy-vendor_scripts',
+  'copy-vendor',
   'copy-images',
   'copy-fonts',
 ];
@@ -52,7 +52,7 @@ gulp.task('watch', function(){
 });
 
 gulp.task('copy', [
-    'copy-vendor_scripts:dev',
+    'copy-vendor:dev',
     'copy-images:dev',
     'copy-fonts:dev',
   ]);
